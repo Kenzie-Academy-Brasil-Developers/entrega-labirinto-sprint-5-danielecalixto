@@ -4,6 +4,26 @@
     background-color: palevioletred;
 }
 
+h1 {
+    margin: 0px;
+    margin-top: 20px;
+    font-family:OCR A Std, monospace;
+    font-size: 70px;
+    font-weight: 500;
+    padding: 0px;
+    color: palevioletred;
+    height: 100px;
+    text-align: center;
+}
+
+p {
+    font-family:OCR A Std, monospace;
+    color: red;
+    font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+}
+
 .free {
     width: 30px;
     height: 30px;
@@ -30,14 +50,27 @@
     width: 30px;
     height: 30px;
     top: 270px;
-    background-color: red;
+    left: 0px;
+    background-color: white;
+    background-image: url(./images/220px-Heart_corazón.svg.png);
+    background-size: cover;
     position: absolute;
 }
 
 body {
     margin: 0px;
 }
+#game {
+    margin: 0 auto;
+    width: 660px;
+    position: relative;
+}
+
+.maze {
+
+}
 * {
+    background: pink;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;

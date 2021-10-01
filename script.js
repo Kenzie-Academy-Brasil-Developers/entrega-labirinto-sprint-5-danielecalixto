@@ -34,7 +34,7 @@ for (let i=0; i<map.length; i++) {
             div.classList.add("free");
         } else if (line[i] == "S") {
             div.classList.add("start");
-        } else if (line[i] == "S") {
+        } else if (line[i] == "F") {
             div.classList.add("final");
         }
         lineWall.appendChild(div);
@@ -59,24 +59,26 @@ function noWallAndWinner(map, keyName) {
     } else if (keyName == "ArrowLeft") {
         c -= 1;
     }
-    if (map[l][c] == " ") {
-        gamer = [l, c];
-        result = true;
-    } else if (map[l][c] == "W") {
-        l = gamer[0];
-        c = gamer[1];
-        result = false;
-    } else if (map[l][c] == "S") {
-        gamer = [l, c];
-        result = true;
-    } else if (map[l][c] == "F") {
-        gamer = [l, c];
-        result = true;
-        let body = document.getElementById("body");
-        const paragraph = document.createElement('p');
-        paragraph.innerText = "Vitória!!!";
-        body.appendChild(paragraph);
-    }
+    if (c>0 && c<=20) {
+        if (map[l][c] == " ") {
+            gamer = [l, c];
+            result = true;
+        } else if (map[l][c] == "W") {
+            l = gamer[0];
+            c = gamer[1];
+            result = false;
+        } else if (map[l][c] == "S") {
+            gamer = [l, c];
+            result = true;
+        } else if (map[l][c] == "F") {
+            gamer = [l, c];
+            result = true;
+            let body = document.getElementById("body");
+            const paragraph = document.createElement('p');
+            paragraph.innerText = "VITÓRIA!";
+            body.appendChild(paragraph);
+        }
+    } else result = false;
     return result;
 }
 
