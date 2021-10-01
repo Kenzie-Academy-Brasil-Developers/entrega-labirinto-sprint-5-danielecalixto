@@ -1,7 +1,3 @@
-// let div = document.getElementById('maze');
-// const dani = document.createElement('div');
-// dani.classList.add("wall");
-// div.appendChild(dani);
 
 const map = [
     "WWWWWWWWWWWWWWWWWWWWW",
@@ -23,10 +19,10 @@ const map = [
 
 let line = [];
 let lineClass = '';
-let divToAppend = document.getElementById('maze');
+let divToAppend = document.getElementById("maze");
 
 for (let i=0; i<map.length; i++) {
-    const lineWall = document.createElement('div');
+    const lineWall = document.createElement("div");
     lineWall.classList.add("line");
     divToAppend.appendChild(lineWall);
     line = map[i].split("");
@@ -45,51 +41,67 @@ for (let i=0; i<map.length; i++) {
     }
 }
 
-
-let boxTop = 270;
-let boxLeft = 0;
-let l = 10;
+let l = 9;
 let c = 0;
-let pos = [];
-let gamer = [];
+let mapPosition = [l, c];
+let mapPositionArray = [];
+let mapPositionString = "";
+let gamer = mapPosition;
+let result;
+
+function noWallAndWinner(map, keyName) {
+    if (keyName == "ArrowDown") {
+        l += 1;
+    } else if (keyName == "ArrowUp") {
+        l -= 1;
+    } else if (keyName == "ArrowRight") {
+        c += 1;
+    } else if (keyName == "ArrowLeft") {
+        c -= 1;
+    }
+    if (map[l][c] == " ") {
+        gamer = [l, c];
+        result = true;
+    } else if (map[l][c] == "W") {
+        l = gamer[0];
+        c = gamer[1];
+        result = false;
+    } else if (map[l][c] == "S") {
+        gamer = [l, c];
+        result = true;
+    } else if (map[l][c] == "F") {
+        gamer = [l, c];
+        result = true;
+        let body = document.getElementById("body");
+        const paragraph = document.createElement('p');
+        paragraph.innerText = "Vitória!!!";
+        body.appendChild(paragraph);
+    }
+    return result;
+}
+
+boxLeft = 0;
+boxTop = 270;
 
 document.addEventListener("keydown", (event) => {
     const keyName = event.key;
-    console.log(keyName);
-    pos = gamer;
-    console.log(gamer);
-    if (keyName == "ArrowDown") {
-        boxTop += 30;
-        l = l+1;
-        pos = [l, c];
-        if (map[l][c] == " ") {
+    if (noWallAndWinner(map, keyName) == true) {
+        if (keyName == "ArrowDown") {
+            boxTop += 30;
             document.getElementById("gamer").style.top = boxTop + "px";
-            gamer = [l, c];
+        } else if (keyName == "ArrowUp") {
+            boxTop -= 30;
+            document.getElementById("gamer").style.top = boxTop + "px";
+        } else if (keyName == "ArrowRight") {
+            boxLeft += 30;
+            document.getElementById("gamer").style.left = boxLeft + "px";
+        } else if (keyName == "ArrowLeft") {
+            boxLeft -= 30;
+            document.getElementById("gamer").style.left = boxLeft + "px";
         }
-        console.log(pos);
-    } else if (keyName == "ArrowUp") {
-        boxTop = boxTop - 30;
-        document.getElementById("gamer").style.top = boxTop + "px";
-        l = l-1;
-        pos = [l, c];
-        console.log(pos);
-    } else if (keyName == "ArrowRight") {
-        boxLeft += 30;
-        document.getElementById("gamer").style.left = boxLeft + "px";
-        c = c+1;
-        pos = [l, c];
-        console.log(pos);
-    } else if (keyName == "ArrowLeft") {
-        boxLeft = boxLeft - 30;
-        document.getElementById("gamer").style.left = boxLeft + "px";
-        c = c-1;
-        pos = [l, c];
-        console.log(pos);
-    }
-                
+    }            
 });
 
-function noWall(l,c) {
-    
-}
+
+
 
